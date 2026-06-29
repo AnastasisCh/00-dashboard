@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UI Portfolio — Choose Your Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080b12;
+      --bg2: #0e1220;
+      --surface: rgba(255,255,255,0.04);
+      --surface-hover: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.2);
+      --text: #f0f2f8;
+      --muted: #7a849a;
+      --pill-bg: rgba(255,255,255,0.06);
+      --pill-active: rgba(255,255,255,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(99,102,241,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(236,72,153,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(16,185,129,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 72px 24px 48px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.3);
+      color: #a5b4fc;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .badge::before { content: '●'; font-size: 7px; color: #818cf8; }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 30%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    /* ── FILTERS ── */
+    .filters {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0 24px 48px;
+    }
+
+    .filter-btn {
+      background: var(--pill-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover { background: var(--pill-active); color: var(--text); border-color: var(--border-hover); }
+    .filter-btn.active {
+      background: rgba(99,102,241,0.2);
+      border-color: rgba(99,102,241,0.5);
+      color: #a5b4fc;
+    }
+
+    /* ── GRID ── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(.22,.68,0,1.2),
+                  box-shadow 0.3s ease,
+                  border-color 0.3s ease,
+                  background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--card-color-a, transparent) 0%, var(--card-color-b, transparent) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: inherit;
+    }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: var(--card-accent, var(--border-hover));
+      box-shadow:
+        0 20px 60px -10px rgba(0,0,0,0.5),
+        0 0 0 1px var(--card-accent, transparent),
+        0 0 40px -10px var(--card-glow, transparent);
+      background: var(--surface-hover);
+    }
+    .card:hover::before { opacity: 0.06; }
+
+    /* ── CARD TOP ── */
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+      background: var(--card-icon-bg, rgba(255,255,255,0.06));
+      border: 1px solid var(--card-accent-soft, rgba(255,255,255,0.1));
+    }
+
+    .card-badge {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--card-badge-bg, rgba(255,255,255,0.06));
+      color: var(--card-badge-color, var(--muted));
+      border: 1px solid var(--card-badge-border, transparent);
+      white-space: nowrap;
+    }
+
+    /* ── CARD BODY ── */
+    .card-body { flex: 1; }
+
+    .card-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .card-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── CARD TAGS ── */
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+    }
+
+    /* ── CARD FOOTER ── */
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-style {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-style::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--card-accent, #555);
+      display: inline-block;
+    }
+
+    .card-cta {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--card-accent-text, var(--muted));
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s ease, color 0.2s ease;
+    }
+    .card:hover .card-cta {
+      gap: 10px;
+      color: var(--text);
+    }
+    .card-cta svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+    .card:hover .card-cta svg { transform: translateX(3px); }
+
+    /* ── HIDDEN CARD (filtered) ── */
+    .card.hidden {
+      display: none;
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 0;
+      color: var(--muted);
+      display: none;
+    }
+    .empty-state.show { display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal {
+      background: #13172a;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 36px;
+      max-width: 500px;
+      width: 100%;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.25s cubic-bezier(.22,.68,0,1.2);
+      position: relative;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--text); }
+
+    .modal-icon { font-size: 48px; margin-bottom: 16px; }
+
+    .modal h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .modal-category {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .modal p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-primary {
+      flex: 1;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 13px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      border-radius: 12px;
+      padding: 13px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+
+    @media (max-width: 640px) {
+      header { padding: 48px 20px 32px; }
+      main { padding: 0 16px 60px; grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge">UI Portfolio</div>
+    <h1>Choose Your Website Design</h1>
+    <p>Browse our curated collection of premium website designs. Each template is fully responsive, animated, and ready for your brand.</p>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All Designs</button>
+    <button class="filter-btn" data-filter="restaurant">Restaurant</button>
+    <button class="filter-btn" data-filter="bar">Bar & Lounge</button>
+    <button class="filter-btn" data-filter="cafe">Café</button>
+    <button class="filter-btn" data-filter="services">Services</button>
+    <button class="filter-btn" data-filter="events">Events</button>
+  </div>
+
+  <main id="grid">
+
+    <!-- 1. Botanica -->
+    <a class="card" href="#" data-folder="15-botanica" data-category="restaurant"
+       style="
+         --card-accent: #6ee7b7;
+         --card-glow: rgba(110,231,183,0.3);
+         --card-accent-soft: rgba(110,231,183,0.2);
+         --card-icon-bg: rgba(110,231,183,0.1);
+         --card-badge-bg: rgba(110,231,183,0.1);
+         --card-badge-color: #6ee7b7;
+         --card-badge-border: rgba(110,231,183,0.25);
+         --card-accent-text: #6ee7b7;
+         --card-color-a: #6ee7b7;
+         --card-color-b: #10b981;
+       ">
+      <div class="card-top">
+        <div class="card-icon">🌿</div>
+        <span class="card-badge">Restaurant</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Botanica</div>
+        <div class="card-desc">A lush botanical dining concept with an organic, nature-forward aesthetic. Elegant greenery meets refined cuisine.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Organic</span>
+        <span class="tag">Minimal</span>
+        <span class="tag">Elegant</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Natural &amp; Serene</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 2. Coffee Minimal -->
+    <a class="card" href="#" data-folder="16-coffee-minimal" data-category="cafe"
+       style="
+         --card-accent: #fbbf24;
+         --card-glow: rgba(251,191,36,0.3);
+         --card-accent-soft: rgba(251,191,36,0.2);
+         --card-icon-bg: rgba(251,191,36,0.1);
+         --card-badge-bg: rgba(251,191,36,0.1);
+         --card-badge-color: #fbbf24;
+         --card-badge-border: rgba(251,191,36,0.25);
+         --card-accent-text: #fbbf24;
+         --card-color-a: #fbbf24;
+         --card-color-b: #f59e0b;
+       ">
+      <div class="card-top">
+        <div class="card-icon">☕</div>
+        <span class="card-badge">Café</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Coffee Minimal</div>
+        <div class="card-desc">Specialty single-origin coffee shop with a clean, minimalist layout. Light/dark theme switcher and bilingual (EN/GR) support included.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Minimal</span>
+        <span class="tag">Dark Mode</span>
+        <span class="tag">Bilingual</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Clean &amp; Minimal</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 3. Ironform Build -->
+    <a class="card" href="#" data-folder="17-ironform-build" data-category="services"
+       style="
+         --card-accent: #f97316;
+         --card-glow: rgba(249,115,22,0.3);
+         --card-accent-soft: rgba(249,115,22,0.2);
+         --card-icon-bg: rgba(249,115,22,0.1);
+         --card-badge-bg: rgba(249,115,22,0.1);
+         --card-badge-color: #f97316;
+         --card-badge-border: rgba(249,115,22,0.25);
+         --card-accent-text: #f97316;
+         --card-color-a: #f97316;
+         --card-color-b: #ea580c;
+       ">
+      <div class="card-top">
+        <div class="card-icon">🏗️</div>
+        <span class="card-badge">Services</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Ironform Build</div>
+        <div class="card-desc">Bold construction company site with industrial typography. Features project showcases, services, and lead-capture quote forms.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Bold</span>
+        <span class="tag">Industrial</span>
+        <span class="tag">Dark</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Industrial &amp; Strong</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 4. Bar Noir -->
+    <a class="card" href="#" data-folder="18-bar-noir" data-category="bar"
+       style="
+         --card-accent: #c084fc;
+         --card-glow: rgba(192,132,252,0.3);
+         --card-accent-soft: rgba(192,132,252,0.2);
+         --card-icon-bg: rgba(192,132,252,0.1);
+         --card-badge-bg: rgba(192,132,252,0.1);
+         --card-badge-color: #c084fc;
+         --card-badge-border: rgba(192,132,252,0.25);
+         --card-accent-text: #c084fc;
+         --card-color-a: #c084fc;
+         --card-color-b: #a855f7;
+       ">
+      <div class="card-top">
+        <div class="card-icon">🍸</div>
+        <span class="card-badge">Bar</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Bar Noir</div>
+        <div class="card-desc">A dark, moody cocktail bar experience with premium spirits. Features animated cocktail menu, bilingual toggle, and atmospheric visuals.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Dark Luxury</span>
+        <span class="tag">Animated</span>
+        <span class="tag">Bilingual</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Dark &amp; Luxurious</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 5. Bliss Weddings -->
+    <a class="card" href="#" data-folder="19-bliss-weddings" data-category="events"
+       style="
+         --card-accent: #f9a8d4;
+         --card-glow: rgba(249,168,212,0.3);
+         --card-accent-soft: rgba(249,168,212,0.2);
+         --card-icon-bg: rgba(249,168,212,0.1);
+         --card-badge-bg: rgba(249,168,212,0.1);
+         --card-badge-color: #f9a8d4;
+         --card-badge-border: rgba(249,168,212,0.25);
+         --card-accent-text: #f9a8d4;
+         --card-color-a: #f9a8d4;
+         --card-color-b: #ec4899;
+       ">
+      <div class="card-top">
+        <div class="card-icon">💍</div>
+        <span class="card-badge">Events</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Bliss Weddings</div>
+        <div class="card-desc">Romantic wedding planning studio with a soft, editorial aesthetic. Gallery sections, service packages, and emotional storytelling layout.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Romantic</span>
+        <span class="tag">Editorial</span>
+        <span class="tag">Elegant</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Soft &amp; Romantic</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 6. Brasserie 1891 -->
+    <a class="card" href="#" data-folder="20-brasserie-1891" data-category="restaurant"
+       style="
+         --card-accent: #d4a96a;
+         --card-glow: rgba(212,169,106,0.3);
+         --card-accent-soft: rgba(212,169,106,0.2);
+         --card-icon-bg: rgba(212,169,106,0.1);
+         --card-badge-bg: rgba(212,169,106,0.1);
+         --card-badge-color: #d4a96a;
+         --card-badge-border: rgba(212,169,106,0.25);
+         --card-accent-text: #d4a96a;
+         --card-color-a: #d4a96a;
+         --card-color-b: #b45309;
+       ">
+      <div class="card-top">
+        <div class="card-icon">🥂</div>
+        <span class="card-badge">Restaurant</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Brasserie 1891</div>
+        <div class="card-desc">Classic French brasserie with heritage typography and warm gold accents. Timeless, editorial design that evokes century-old Parisian dining culture.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Classic</span>
+        <span class="tag">Heritage</span>
+        <span class="tag">Gold</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Heritage &amp; Classic</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 7. EduSpark Academy -->
+    <a class="card" href="#" data-folder="21-eduspark-academy" data-category="services"
+       style="
+         --card-accent: #facc15;
+         --card-glow: rgba(250,204,21,0.3);
+         --card-accent-soft: rgba(250,204,21,0.2);
+         --card-icon-bg: rgba(250,204,21,0.1);
+         --card-badge-bg: rgba(250,204,21,0.1);
+         --card-badge-color: #facc15;
+         --card-badge-border: rgba(250,204,21,0.25);
+         --card-accent-text: #facc15;
+         --card-color-a: #facc15;
+         --card-color-b: #eab308;
+       ">
+      <div class="card-top">
+        <div class="card-icon">⚡</div>
+        <span class="card-badge">Education</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">EduSpark Academy</div>
+        <div class="card-desc">Dynamic education platform with energetic design. Course listings, instructor profiles, and call-to-action sections built for conversion.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Dynamic</span>
+        <span class="tag">Modern</span>
+        <span class="tag">Bold</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Energetic &amp; Modern</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 8. Neon Garden -->
+    <a class="card" href="#" data-folder="22-neon-garden" data-category="bar"
+       style="
+         --card-accent: #34d399;
+         --card-glow: rgba(52,211,153,0.35);
+         --card-accent-soft: rgba(52,211,153,0.2);
+         --card-icon-bg: rgba(52,211,153,0.1);
+         --card-badge-bg: rgba(52,211,153,0.1);
+         --card-badge-color: #34d399;
+         --card-badge-border: rgba(52,211,153,0.25);
+         --card-accent-text: #34d399;
+         --card-color-a: #34d399;
+         --card-color-b: #059669;
+       ">
+      <div class="card-top">
+        <div class="card-icon">🌸</div>
+        <span class="card-badge">Bar &amp; Lounge</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Neon Garden</div>
+        <div class="card-desc">Vibrant neon-lit garden lounge with lush visuals and a playful, electric atmosphere. Eye-catching animations and a bold color palette.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Neon</span>
+        <span class="tag">Vibrant</span>
+        <span class="tag">Animated</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Vibrant &amp; Electric</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 9. Taverna Mediterra -->
+    <a class="card" href="#" data-folder="23-taverna-mediterra" data-category="restaurant"
+       style="
+         --card-accent: #60a5fa;
+         --card-glow: rgba(96,165,250,0.3);
+         --card-accent-soft: rgba(96,165,250,0.2);
+         --card-icon-bg: rgba(96,165,250,0.1);
+         --card-badge-bg: rgba(96,165,250,0.1);
+         --card-badge-color: #60a5fa;
+         --card-badge-border: rgba(96,165,250,0.25);
+         --card-accent-text: #60a5fa;
+         --card-color-a: #60a5fa;
+         --card-color-b: #2563eb;
+       ">
+      <div class="card-top">
+        <div class="card-icon">🫒</div>
+        <span class="card-badge">Restaurant</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Taverna Mediterra</div>
+        <div class="card-desc">Warm Mediterranean taverna with Aegean blue tones and rustic textures. Bilingual menu, authentic recipes, and community storytelling.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Mediterranean</span>
+        <span class="tag">Warm</span>
+        <span class="tag">Bilingual</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Warm &amp; Authentic</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 10. Brunch Vivid -->
+    <a class="card" href="#" data-folder="24-brunch-vivid" data-category="restaurant"
+       style="
+         --card-accent: #fb923c;
+         --card-glow: rgba(251,146,60,0.3);
+         --card-accent-soft: rgba(251,146,60,0.2);
+         --card-icon-bg: rgba(251,146,60,0.1);
+         --card-badge-bg: rgba(251,146,60,0.1);
+         --card-badge-color: #fb923c;
+         --card-badge-border: rgba(251,146,60,0.25);
+         --card-accent-text: #fb923c;
+         --card-color-a: #fb923c;
+         --card-color-b: #ea580c;
+       ">
+      <div class="card-top">
+        <div class="card-icon">🥞</div>
+        <span class="card-badge">Restaurant</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Brunch Vivid</div>
+        <div class="card-desc">Colorful and playful all-day brunch restaurant. Bright palette with joyful typography, social-first visuals, and an instagram-ready grid layout.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Colorful</span>
+        <span class="tag">Playful</span>
+        <span class="tag">Modern</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Playful &amp; Colorful</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 11. Rooftop Lounge -->
+    <a class="card" href="#" data-folder="25-rooftop-lounge" data-category="bar"
+       style="
+         --card-accent: #818cf8;
+         --card-glow: rgba(129,140,248,0.3);
+         --card-accent-soft: rgba(129,140,248,0.2);
+         --card-icon-bg: rgba(129,140,248,0.1);
+         --card-badge-bg: rgba(129,140,248,0.1);
+         --card-badge-color: #818cf8;
+         --card-badge-border: rgba(129,140,248,0.25);
+         --card-accent-text: #818cf8;
+         --card-color-a: #818cf8;
+         --card-color-b: #6366f1;
+       ">
+      <div class="card-top">
+        <div class="card-icon">🌇</div>
+        <span class="card-badge">Bar &amp; Lounge</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Rooftop Lounge</div>
+        <div class="card-desc">Upscale Athens rooftop bar with panoramic city views. Sophisticated indigo palette, bilingual, and open nightly until late.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Upscale</span>
+        <span class="tag">Urban</span>
+        <span class="tag">Bilingual</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Upscale &amp; Urban</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 12. Espresso Comune -->
+    <a class="card" href="#" data-folder="26-espresso-comune" data-category="cafe"
+       style="
+         --card-accent: #a3845a;
+         --card-glow: rgba(163,132,90,0.3);
+         --card-accent-soft: rgba(163,132,90,0.2);
+         --card-icon-bg: rgba(163,132,90,0.1);
+         --card-badge-bg: rgba(163,132,90,0.1);
+         --card-badge-color: #c9a97a;
+         --card-badge-border: rgba(163,132,90,0.25);
+         --card-accent-text: #c9a97a;
+         --card-color-a: #a3845a;
+         --card-color-b: #7c5c3a;
+       ">
+      <div class="card-top">
+        <div class="card-icon">☕</div>
+        <span class="card-badge">Café</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Espresso Comune</div>
+        <div class="card-desc">Community-driven artisan espresso bar with a warm, editorial aesthetic. Split-nav layout, bilingual coffee menu, and rich earthy tones.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Artisan</span>
+        <span class="tag">Warm</span>
+        <span class="tag">Community</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Artisan &amp; Warm</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 13. Lumiere -->
+    <a class="card" href="#" data-folder="27-lumiere" data-category="restaurant"
+       style="
+         --card-accent: #e2c97e;
+         --card-glow: rgba(226,201,126,0.3);
+         --card-accent-soft: rgba(226,201,126,0.2);
+         --card-icon-bg: rgba(226,201,126,0.1);
+         --card-badge-bg: rgba(226,201,126,0.1);
+         --card-badge-color: #e2c97e;
+         --card-badge-border: rgba(226,201,126,0.25);
+         --card-accent-text: #e2c97e;
+         --card-color-a: #e2c97e;
+         --card-color-b: #b8962a;
+       ">
+      <div class="card-top">
+        <div class="card-icon">✨</div>
+        <span class="card-badge">Fine Dining</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Lumière</div>
+        <div class="card-desc">Sophisticated fine dining with luxury gold accents and dramatic dark backgrounds. Elegant motion design and a cinematic hero section.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Luxury</span>
+        <span class="tag">Gold</span>
+        <span class="tag">Cinematic</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Luxury &amp; Cinematic</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <!-- 14. Trattoria Vico -->
+    <a class="card" href="#" data-folder="28-trattoria-vico" data-category="restaurant"
+       style="
+         --card-accent: #f87171;
+         --card-glow: rgba(248,113,113,0.3);
+         --card-accent-soft: rgba(248,113,113,0.2);
+         --card-icon-bg: rgba(248,113,113,0.1);
+         --card-badge-bg: rgba(248,113,113,0.1);
+         --card-badge-color: #f87171;
+         --card-badge-border: rgba(248,113,113,0.25);
+         --card-accent-text: #f87171;
+         --card-color-a: #f87171;
+         --card-color-b: #dc2626;
+       ">
+      <div class="card-top">
+        <div class="card-icon">🍝</div>
+        <span class="card-badge">Restaurant</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Trattoria Vico</div>
+        <div class="card-desc">Rustic Italian trattoria with warmth and soul. Handcrafted pasta, family recipes, and a welcoming neighbourhood feel baked into every pixel.</div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Italian</span>
+        <span class="tag">Rustic</span>
+        <span class="tag">Warm</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-style">Rustic &amp; Soulful</span>
+        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+    </a>
+
+    <div class="empty-state" id="emptyState">
+      <p style="font-size:2rem;margin-bottom:12px">🔍</p>
+      <p>No designs match this filter.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>14 premium Angular SPA designs &nbsp;·&nbsp; All designs are fully responsive &amp; production-ready</p>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-icon" id="modalIcon"></div>
+      <div class="modal-category" id="modalCategory"></div>
+      <h2 id="modalName"></h2>
+      <p id="modalDesc"></p>
+      <div class="modal-tags" id="modalTags"></div>
+      <div class="modal-actions">
+        <a class="btn-primary" id="modalOpenBtn" href="#" target="_blank">
+          Open Design
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <button class="btn-secondary" id="modalCloseBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── FILTER ──────────────────────────────────────────────
+    const filterMap = {
+      all: ['restaurant','bar','cafe','services','events'],
+      restaurant: ['restaurant'],
+      bar: ['bar'],
+      cafe: ['cafe'],
+      services: ['services'],
+      events: ['events'],
+    };
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        const allowed = filterMap[filter];
+        let visible = 0;
+        document.querySelectorAll('.card').forEach(card => {
+          const cat = card.dataset.category;
+          if (allowed.includes(cat)) {
+            card.classList.remove('hidden');
+            visible++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+        document.getElementById('emptyState').classList.toggle('show', visible === 0);
+      });
+    });
+
+    // ── MODAL ───────────────────────────────────────────────
+    const overlay   = document.getElementById('modalOverlay');
+    const modalIcon = document.getElementById('modalIcon');
+    const modalCat  = document.getElementById('modalCategory');
+    const modalName = document.getElementById('modalName');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalTags = document.getElementById('modalTags');
+    const modalBtn  = document.getElementById('modalOpenBtn');
+
+    function openModal(card) {
+      modalIcon.textContent = card.querySelector('.card-icon').textContent;
+      modalCat.textContent  = card.querySelector('.card-badge').textContent;
+      modalName.textContent = card.querySelector('.card-name').textContent;
+      modalDesc.textContent = card.querySelector('.card-desc').textContent;
+      modalTags.innerHTML   = card.querySelector('.card-tags').innerHTML;
+
+      // Build URL — update these to point to your deployed/served URLs
+      const folder = card.dataset.folder;
+      const url = URLS[folder] || '#';
+      modalBtn.href = url;
+      if (url === '#') {
+        modalBtn.style.pointerEvents = 'none';
+        modalBtn.style.opacity = '0.45';
+        modalBtn.innerHTML = 'Not yet deployed <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+        modalBtn.title = 'Deploy to Vercel or run: ng serve --port 42XX in the project folder';
+      } else {
+        modalBtn.style.pointerEvents = '';
+        modalBtn.style.opacity = '1';
+        modalBtn.innerHTML = 'Open Design <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+      }
+
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', e => {
+        e.preventDefault();
+        openModal(card);
+      });
+    });
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // ── URL MAP ─────────────────────────────────────────────
+    // ── HOW TO PREVIEW LOCALLY ───────────────────────────────────────────
+    // Open a terminal in each project folder and run:
+    //   ng serve --port <PORT>
+    // Then reload this dashboard — the "Open Design" button will link live.
+    //
+    // Once deployed to Vercel, replace each '#' with the Vercel URL.
+    // ────────────────────────────────────────────────────────────────────
+    const URLS = {
+      '15-botanica':         '#',  // ng serve --port 4201
+      '16-coffee-minimal':   '#',  // ng serve --port 4202
+      '17-ironform-build':   '#',  // ng serve --port 4203
+      '18-bar-noir':         '#',  // ng serve --port 4204
+      '19-bliss-weddings':   '#',  // ng serve --port 4205
+      '20-brasserie-1891':   '#',  // ng serve --port 4206
+      '21-eduspark-academy': '#',  // ng serve --port 4207
+      '22-neon-garden':      '#',  // ng serve --port 4208
+      '23-taverna-mediterra':'#',  // ng serve --port 4209
+      '24-brunch-vivid':     '#',  // ng serve --port 4210
+      '25-rooftop-lounge':   '#',  // ng serve --port 4211
+      '26-espresso-comune':  '#',  // ng serve --port 4212
+      '27-lumiere':          '#',  // ng serve --port 4213
+      '28-trattoria-vico':   '#',  // ng serve --port 4214
+    };
+  </script>
+</body>
+</html>
