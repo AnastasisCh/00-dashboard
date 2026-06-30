@@ -432,6 +432,21 @@
       header { padding: 48px 20px 32px; }
       main { padding: 0 16px 60px; grid-template-columns: 1fr; }
     }
+
+    @media (max-width: 480px) {
+      header { padding: 36px 16px 24px; }
+      header h1 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+      header p { font-size: 0.9rem; }
+      main { padding: 0 12px 48px; gap: 14px; }
+      .card { padding: 20px; }
+      .card-icon { width: 46px; height: 46px; font-size: 22px; border-radius: 12px; }
+      .card-name { font-size: 1.05rem; }
+      .filters { padding: 0 12px 32px; gap: 6px; }
+      .filter-btn { font-size: 12px; padding: 6px 14px; }
+      .modal { padding: 24px 20px; border-radius: 16px; }
+      .modal-actions { flex-direction: column; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+    }
   </style>
 </head>
 <body>
@@ -445,9 +460,12 @@
   <div class="filters">
     <button class="filter-btn active" data-filter="all">All Designs</button>
     <button class="filter-btn" data-filter="restaurant">Restaurant</button>
-    <button class="filter-btn" data-filter="bar">Bar & Lounge</button>
+    <button class="filter-btn" data-filter="fine-dining">Fine Dining</button>
+    <button class="filter-btn" data-filter="italian">Italian</button>
+    <button class="filter-btn" data-filter="bar">Bar &amp; Lounge</button>
     <button class="filter-btn" data-filter="cafe">Café</button>
     <button class="filter-btn" data-filter="services">Services</button>
+    <button class="filter-btn" data-filter="education">Education</button>
     <button class="filter-btn" data-filter="events">Events</button>
   </div>
 
@@ -652,7 +670,7 @@
     </a>
 
     <!-- 7. EduSpark Academy -->
-    <a class="card" href="#" data-folder="21-eduspark-academy" data-category="services"
+    <a class="card" href="#" data-folder="21-eduspark-academy" data-category="education"
        style="
          --card-accent: #facc15;
          --card-glow: rgba(250,204,21,0.3);
@@ -850,7 +868,7 @@
     </a>
 
     <!-- 13. Lumiere -->
-    <a class="card" href="#" data-folder="27-lumiere" data-category="restaurant"
+    <a class="card" href="#" data-folder="27-lumiere" data-category="fine-dining"
        style="
          --card-accent: #e2c97e;
          --card-glow: rgba(226,201,126,0.3);
@@ -883,7 +901,7 @@
     </a>
 
     <!-- 14. Trattoria Vico -->
-    <a class="card" href="#" data-folder="28-trattoria-vico" data-category="restaurant"
+    <a class="card" href="#" data-folder="28-trattoria-vico" data-category="italian"
        style="
          --card-accent: #f87171;
          --card-glow: rgba(248,113,113,0.3);
@@ -948,11 +966,14 @@
   <script>
     // ── FILTER ──────────────────────────────────────────────
     const filterMap = {
-      all: ['restaurant','bar','cafe','services','events'],
+      all: ['restaurant','bar','cafe','services','events','fine-dining','italian','education'],
       restaurant: ['restaurant'],
+      'fine-dining': ['fine-dining'],
+      italian: ['italian'],
       bar: ['bar'],
       cafe: ['cafe'],
       services: ['services'],
+      education: ['education'],
       events: ['events'],
     };
 
@@ -1037,20 +1058,20 @@
     // Once deployed to Vercel, replace each '#' with the Vercel URL.
     // ────────────────────────────────────────────────────────────────────
     const URLS = {
-      '15-botanica':         '#',  // ng serve --port 4201
-      '16-coffee-minimal':   '#',  // ng serve --port 4202
+      '15-botanica':         'https://15-botanica-gtytm9hvx-anastasishatzis-8269s-projects.vercel.app/',
+      '16-coffee-minimal':   'https://16-coffee-minimal-ibv7237cg-anastasishatzis-8269s-projects.vercel.app/',
       '17-ironform-build':   '#',  // ng serve --port 4203
-      '18-bar-noir':         '#',  // ng serve --port 4204
+      '18-bar-noir':         'https://09-bar-noir-5zqs.vercel.app/',  // ng serve --port 4204
       '19-bliss-weddings':   '#',  // ng serve --port 4205
-      '20-brasserie-1891':   '#',  // ng serve --port 4206
+      '20-brasserie-1891':   'https://20-brasserie-1891-ceqhvlvl3-anastasishatzis-8269s-projects.vercel.app/',
       '21-eduspark-academy': '#',  // ng serve --port 4207
-      '22-neon-garden':      '#',  // ng serve --port 4208
-      '23-taverna-mediterra':'#',  // ng serve --port 4209
+      '22-neon-garden':      'https://22-neon-garden-34guydqtk-anastasishatzis-8269s-projects.vercel.app/',
+      '23-taverna-mediterra':'https://10-taverna-mediterra-9yrew8jrj-anastasishatzis-8269s-projects.vercel.app/',
       '24-brunch-vivid':     '#',  // ng serve --port 4210
       '25-rooftop-lounge':   '#',  // ng serve --port 4211
       '26-espresso-comune':  '#',  // ng serve --port 4212
-      '27-lumiere':          '#',  // ng serve --port 4213
-      '28-trattoria-vico':   '#',  // ng serve --port 4214
+      '27-lumiere':          'https://14-lumiere-7p6m9kpdm-anastasishatzis-8269s-projects.vercel.app/',
+      '28-trattoria-vico':   'https://15-trattoria-vico-ezzafh1fs-anastasishatzis-8269s-projects.vercel.app/',
     };
   </script>
 </body>
