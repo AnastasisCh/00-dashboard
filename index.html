@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UI Portfolio — Choose Your Design</title>
+  <title>UI Portfolio — Επιλέξτε το Design σας</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -51,6 +51,36 @@
       z-index: 1;
       text-align: center;
       padding: 72px 24px 48px;
+    }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: var(--pill-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .lang-toggle::before {
+      content: '🌐';
+      font-size: 13px;
+    }
+    .lang-toggle:hover {
+      background: var(--pill-active);
+      color: var(--text);
+      border-color: var(--border-hover);
     }
 
     .badge {
@@ -446,27 +476,29 @@
       .modal { padding: 24px 20px; border-radius: 16px; }
       .modal-actions { flex-direction: column; }
       .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+      .lang-toggle { top: 12px; right: 12px; font-size: 11px; padding: 5px 10px; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="badge">UI Portfolio</div>
-    <h1>Choose Your Website Design</h1>
-    <p>Browse our curated collection of premium website designs. Each template is fully responsive, animated, and ready for your brand.</p>
+    <button class="lang-toggle" id="langToggle">EN</button>
+    <div class="badge" data-i18n="badge">UI Portfolio</div>
+    <h1 data-i18n="h1">Επιλέξτε το Design σας</h1>
+    <p data-i18n="subtitle">Περιηγηθείτε στη συλλογή μας από premium web designs. Κάθε template είναι πλήρως responsive, animated και έτοιμο για το brand σας.</p>
   </header>
 
   <div class="filters">
-    <button class="filter-btn active" data-filter="all">All Designs</button>
-    <button class="filter-btn" data-filter="restaurant">Restaurant</button>
-    <button class="filter-btn" data-filter="fine-dining">Fine Dining</button>
-    <button class="filter-btn" data-filter="italian">Italian</button>
-    <button class="filter-btn" data-filter="bar">Bar &amp; Lounge</button>
-    <button class="filter-btn" data-filter="cafe">Café</button>
-    <button class="filter-btn" data-filter="services">Services</button>
-    <button class="filter-btn" data-filter="education">Education</button>
-    <button class="filter-btn" data-filter="events">Events</button>
+    <button class="filter-btn active" data-filter="all"        data-i18n="filter_all">Όλα</button>
+    <button class="filter-btn"        data-filter="restaurant" data-i18n="filter_restaurant">Εστιατόριο</button>
+    <button class="filter-btn"        data-filter="fine-dining" data-i18n="filter_fine_dining">Fine Dining</button>
+    <button class="filter-btn"        data-filter="italian"    data-i18n="filter_italian">Ιταλικό</button>
+    <button class="filter-btn"        data-filter="bar"        data-i18n="filter_bar">Bar &amp; Lounge</button>
+    <button class="filter-btn"        data-filter="cafe"       data-i18n="filter_cafe">Καφέ</button>
+    <button class="filter-btn"        data-filter="services"   data-i18n="filter_services">Υπηρεσίες</button>
+    <button class="filter-btn"        data-filter="education"  data-i18n="filter_education">Εκπαίδευση</button>
+    <button class="filter-btn"        data-filter="events"     data-i18n="filter_events">Εκδηλώσεις</button>
   </div>
 
   <main id="grid">
@@ -487,20 +519,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">🌿</div>
-        <span class="card-badge">Restaurant</span>
+        <span class="card-badge" data-i18n="badge_restaurant">Εστιατόριο</span>
       </div>
       <div class="card-body">
         <div class="card-name">Botanica</div>
-        <div class="card-desc">A lush botanical dining concept with an organic, nature-forward aesthetic. Elegant greenery meets refined cuisine.</div>
+        <div class="card-desc">Μια οργανική γαστρονομική εμπειρία με φυσική αισθητική. Κομψό πράσινο συναντά εκλεπτυσμένη κουζίνα.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Organic</span>
-        <span class="tag">Minimal</span>
-        <span class="tag">Elegant</span>
+        <span class="tag" data-i18n="tag_organic">Οργανικό</span>
+        <span class="tag" data-i18n="tag_minimal">Minimal</span>
+        <span class="tag" data-i18n="tag_elegant">Κομψό</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Natural &amp; Serene</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_botanica">Φυσικό &amp; Γαλήνιο</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -520,20 +552,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">☕</div>
-        <span class="card-badge">Café</span>
+        <span class="card-badge" data-i18n="badge_cafe">Καφέ</span>
       </div>
       <div class="card-body">
         <div class="card-name">Coffee Minimal</div>
-        <div class="card-desc">Specialty single-origin coffee shop with a clean, minimalist layout. Light/dark theme switcher and bilingual (EN/GR) support included.</div>
+        <div class="card-desc">Specialty καφετέρια single-origin με καθαρό, minimalist layout. Εναλλαγή light/dark θέματος και δίγλωσση υποστήριξη (ΕΛ/ΑΝ).</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Minimal</span>
-        <span class="tag">Dark Mode</span>
-        <span class="tag">Bilingual</span>
+        <span class="tag" data-i18n="tag_minimal">Minimal</span>
+        <span class="tag" data-i18n="tag_dark_mode">Dark Mode</span>
+        <span class="tag" data-i18n="tag_bilingual">Δίγλωσσο</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Clean &amp; Minimal</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_coffee">Καθαρό &amp; Minimal</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -553,20 +585,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">🏗️</div>
-        <span class="card-badge">Services</span>
+        <span class="card-badge" data-i18n="badge_services">Υπηρεσίες</span>
       </div>
       <div class="card-body">
         <div class="card-name">Ironform Build</div>
-        <div class="card-desc">Bold construction company site with industrial typography. Features project showcases, services, and lead-capture quote forms.</div>
+        <div class="card-desc">Δυναμικό site για κατασκευαστική εταιρεία με βιομηχανική τυπογραφία. Παρουσίαση έργων, υπηρεσίες και φόρμες προσφοράς.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Bold</span>
-        <span class="tag">Industrial</span>
-        <span class="tag">Dark</span>
+        <span class="tag" data-i18n="tag_bold">Τολμηρό</span>
+        <span class="tag" data-i18n="tag_industrial">Βιομηχανικό</span>
+        <span class="tag" data-i18n="tag_dark">Σκοτεινό</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Industrial &amp; Strong</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_ironform">Βιομηχανικό &amp; Δυνατό</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -586,20 +618,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">🍸</div>
-        <span class="card-badge">Bar</span>
+        <span class="card-badge" data-i18n="badge_bar">Bar</span>
       </div>
       <div class="card-body">
         <div class="card-name">Bar Noir</div>
-        <div class="card-desc">A dark, moody cocktail bar experience with premium spirits. Features animated cocktail menu, bilingual toggle, and atmospheric visuals.</div>
+        <div class="card-desc">Σκοτεινό, ατμοσφαιρικό cocktail bar με premium ποτά. Animated μενού cocktail, δίγλωσση εναλλαγή και ατμοσφαιρικά γραφικά.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Dark Luxury</span>
-        <span class="tag">Animated</span>
-        <span class="tag">Bilingual</span>
+        <span class="tag" data-i18n="tag_dark_luxury">Σκοτεινή Πολυτέλεια</span>
+        <span class="tag" data-i18n="tag_animated">Animated</span>
+        <span class="tag" data-i18n="tag_bilingual">Δίγλωσσο</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Dark &amp; Luxurious</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_barnoir">Σκοτεινό &amp; Πολυτελές</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -619,20 +651,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">💍</div>
-        <span class="card-badge">Events</span>
+        <span class="card-badge" data-i18n="badge_events">Εκδηλώσεις</span>
       </div>
       <div class="card-body">
         <div class="card-name">Bliss Weddings</div>
-        <div class="card-desc">Romantic wedding planning studio with a soft, editorial aesthetic. Gallery sections, service packages, and emotional storytelling layout.</div>
+        <div class="card-desc">Ρομαντικό στούντιο γαμήλιου σχεδιασμού με απαλή, editorial αισθητική. Galleries, πακέτα υπηρεσιών και συναισθηματική αφήγηση.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Romantic</span>
-        <span class="tag">Editorial</span>
-        <span class="tag">Elegant</span>
+        <span class="tag" data-i18n="tag_romantic">Ρομαντικό</span>
+        <span class="tag" data-i18n="tag_editorial">Editorial</span>
+        <span class="tag" data-i18n="tag_elegant">Κομψό</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Soft &amp; Romantic</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_bliss">Απαλό &amp; Ρομαντικό</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -652,20 +684,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">🥂</div>
-        <span class="card-badge">Restaurant</span>
+        <span class="card-badge" data-i18n="badge_restaurant">Εστιατόριο</span>
       </div>
       <div class="card-body">
         <div class="card-name">Brasserie 1891</div>
-        <div class="card-desc">Classic French brasserie with heritage typography and warm gold accents. Timeless, editorial design that evokes century-old Parisian dining culture.</div>
+        <div class="card-desc">Κλασική γαλλική brasserie με κληρονομική τυπογραφία και ζεστές χρυσές αποχρώσεις. Διαχρονικό design που παραπέμπει στην παριζιάνικη κουλτούρα.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Classic</span>
-        <span class="tag">Heritage</span>
-        <span class="tag">Gold</span>
+        <span class="tag" data-i18n="tag_classic">Κλασικό</span>
+        <span class="tag" data-i18n="tag_heritage">Κληρονομικό</span>
+        <span class="tag" data-i18n="tag_gold">Χρυσό</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Heritage &amp; Classic</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_brasserie">Κληρονομικό &amp; Κλασικό</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -685,20 +717,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">⚡</div>
-        <span class="card-badge">Education</span>
+        <span class="card-badge" data-i18n="badge_education">Εκπαίδευση</span>
       </div>
       <div class="card-body">
         <div class="card-name">EduSpark Academy</div>
-        <div class="card-desc">Dynamic education platform with energetic design. Course listings, instructor profiles, and call-to-action sections built for conversion.</div>
+        <div class="card-desc">Δυναμική εκπαιδευτική πλατφόρμα με ενεργητικό design. Λίστες μαθημάτων, προφίλ εκπαιδευτών και τμήματα call-to-action για μετατροπές.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Dynamic</span>
-        <span class="tag">Modern</span>
-        <span class="tag">Bold</span>
+        <span class="tag" data-i18n="tag_dynamic">Δυναμικό</span>
+        <span class="tag" data-i18n="tag_modern">Σύγχρονο</span>
+        <span class="tag" data-i18n="tag_bold">Τολμηρό</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Energetic &amp; Modern</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_eduspark">Ενεργητικό &amp; Σύγχρονο</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -718,20 +750,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">🌸</div>
-        <span class="card-badge">Bar &amp; Lounge</span>
+        <span class="card-badge" data-i18n="badge_bar_lounge">Bar &amp; Lounge</span>
       </div>
       <div class="card-body">
         <div class="card-name">Neon Garden</div>
-        <div class="card-desc">Vibrant neon-lit garden lounge with lush visuals and a playful, electric atmosphere. Eye-catching animations and a bold color palette.</div>
+        <div class="card-desc">Ζωντανό neon garden lounge με καταπράσινα γραφικά και ηλεκτρική ατμόσφαιρα. Εντυπωσιακά animations και τολμηρή χρωματική παλέτα.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Neon</span>
-        <span class="tag">Vibrant</span>
-        <span class="tag">Animated</span>
+        <span class="tag" data-i18n="tag_neon">Neon</span>
+        <span class="tag" data-i18n="tag_vibrant">Ζωντανό</span>
+        <span class="tag" data-i18n="tag_animated">Animated</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Vibrant &amp; Electric</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_neon">Ζωντανό &amp; Ηλεκτρικό</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -751,20 +783,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">🫒</div>
-        <span class="card-badge">Restaurant</span>
+        <span class="card-badge" data-i18n="badge_restaurant">Εστιατόριο</span>
       </div>
       <div class="card-body">
         <div class="card-name">Taverna Mediterra</div>
-        <div class="card-desc">Warm Mediterranean taverna with Aegean blue tones and rustic textures. Bilingual menu, authentic recipes, and community storytelling.</div>
+        <div class="card-desc">Ζεστή μεσογειακή ταβέρνα με αιγαιοπελαγίτικους μπλε τόνους και ρουστίκ υφές. Δίγλωσσο μενού, αυθεντικές συνταγές και κοινοτική αφήγηση.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Mediterranean</span>
-        <span class="tag">Warm</span>
-        <span class="tag">Bilingual</span>
+        <span class="tag" data-i18n="tag_mediterranean">Μεσογειακό</span>
+        <span class="tag" data-i18n="tag_warm">Ζεστό</span>
+        <span class="tag" data-i18n="tag_bilingual">Δίγλωσσο</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Warm &amp; Authentic</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_taverna">Ζεστό &amp; Αυθεντικό</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -784,20 +816,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">🥞</div>
-        <span class="card-badge">Restaurant</span>
+        <span class="card-badge" data-i18n="badge_restaurant">Εστιατόριο</span>
       </div>
       <div class="card-body">
         <div class="card-name">Brunch Vivid</div>
-        <div class="card-desc">Colorful and playful all-day brunch restaurant. Bright palette with joyful typography, social-first visuals, and an instagram-ready grid layout.</div>
+        <div class="card-desc">Πολύχρωμο και παιχνιδιάρικο all-day brunch εστιατόριο. Φωτεινή παλέτα, χαρούμενη τυπογραφία και instagram-ready grid layout.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Colorful</span>
-        <span class="tag">Playful</span>
-        <span class="tag">Modern</span>
+        <span class="tag" data-i18n="tag_colorful">Πολύχρωμο</span>
+        <span class="tag" data-i18n="tag_playful">Παιχνιδιάρικο</span>
+        <span class="tag" data-i18n="tag_modern">Σύγχρονο</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Playful &amp; Colorful</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_brunch">Παιχνιδιάρικο &amp; Πολύχρωμο</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -817,20 +849,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">🌇</div>
-        <span class="card-badge">Bar &amp; Lounge</span>
+        <span class="card-badge" data-i18n="badge_bar_lounge">Bar &amp; Lounge</span>
       </div>
       <div class="card-body">
         <div class="card-name">Rooftop Lounge</div>
-        <div class="card-desc">Upscale Athens rooftop bar with panoramic city views. Sophisticated indigo palette, bilingual, and open nightly until late.</div>
+        <div class="card-desc">Υπερπολυτελές rooftop bar στην Αθήνα με πανοραμική θέα. Εκλεπτυσμένη indigo παλέτα, δίγλωσσο και ανοιχτό κάθε βράδυ αργά.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Upscale</span>
-        <span class="tag">Urban</span>
-        <span class="tag">Bilingual</span>
+        <span class="tag" data-i18n="tag_upscale">Υπερπολυτελές</span>
+        <span class="tag" data-i18n="tag_urban">Αστικό</span>
+        <span class="tag" data-i18n="tag_bilingual">Δίγλωσσο</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Upscale &amp; Urban</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_rooftop">Υπερπολυτελές &amp; Αστικό</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -850,20 +882,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">☕</div>
-        <span class="card-badge">Café</span>
+        <span class="card-badge" data-i18n="badge_cafe">Καφέ</span>
       </div>
       <div class="card-body">
         <div class="card-name">Espresso Comune</div>
-        <div class="card-desc">Community-driven artisan espresso bar with a warm, editorial aesthetic. Split-nav layout, bilingual coffee menu, and rich earthy tones.</div>
+        <div class="card-desc">Artisan espresso bar με κοινοτικό πνεύμα και ζεστή, editorial αισθητική. Split-nav layout, δίγλωσσο μενού καφέ και πλούσιες γήινες αποχρώσεις.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Artisan</span>
-        <span class="tag">Warm</span>
-        <span class="tag">Community</span>
+        <span class="tag" data-i18n="tag_artisan">Artisan</span>
+        <span class="tag" data-i18n="tag_warm">Ζεστό</span>
+        <span class="tag" data-i18n="tag_community">Κοινοτικό</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Artisan &amp; Warm</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_espresso">Artisan &amp; Ζεστό</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -883,20 +915,20 @@
        ">
       <div class="card-top">
         <div class="card-icon">✨</div>
-        <span class="card-badge">Fine Dining</span>
+        <span class="card-badge" data-i18n="badge_fine_dining">Fine Dining</span>
       </div>
       <div class="card-body">
         <div class="card-name">Lumière</div>
-        <div class="card-desc">Sophisticated fine dining with luxury gold accents and dramatic dark backgrounds. Elegant motion design and a cinematic hero section.</div>
+        <div class="card-desc">Εκλεπτυσμένο fine dining με πολυτελείς χρυσές λεπτομέρειες και δραματικά σκοτεινά φόντα. Κομψό motion design και κινηματογραφικό hero section.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Luxury</span>
-        <span class="tag">Gold</span>
-        <span class="tag">Cinematic</span>
+        <span class="tag" data-i18n="tag_luxury">Πολυτελές</span>
+        <span class="tag" data-i18n="tag_gold">Χρυσό</span>
+        <span class="tag" data-i18n="tag_cinematic">Κινηματογραφικό</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Luxury &amp; Cinematic</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_lumiere">Πολυτελές &amp; Κινηματογραφικό</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
@@ -916,32 +948,32 @@
        ">
       <div class="card-top">
         <div class="card-icon">🍝</div>
-        <span class="card-badge">Restaurant</span>
+        <span class="card-badge" data-i18n="badge_italian">Ιταλικό</span>
       </div>
       <div class="card-body">
         <div class="card-name">Trattoria Vico</div>
-        <div class="card-desc">Rustic Italian trattoria with warmth and soul. Handcrafted pasta, family recipes, and a welcoming neighbourhood feel baked into every pixel.</div>
+        <div class="card-desc">Ρουστίκ ιταλική trattoria με ζεστασιά και ψυχή. Χειροποίητα pasta, οικογενειακές συνταγές και φιλόξενη γειτονιά σε κάθε pixel.</div>
       </div>
       <div class="card-tags">
-        <span class="tag">Italian</span>
-        <span class="tag">Rustic</span>
-        <span class="tag">Warm</span>
+        <span class="tag" data-i18n="tag_italian">Ιταλικό</span>
+        <span class="tag" data-i18n="tag_rustic">Ρουστίκ</span>
+        <span class="tag" data-i18n="tag_warm">Ζεστό</span>
       </div>
       <div class="card-footer">
-        <span class="card-style">Rustic &amp; Soulful</span>
-        <span class="card-cta">Preview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="card-style" data-i18n="style_trattoria">Ρουστίκ &amp; Γεμάτο Ψυχή</span>
+        <span class="card-cta"><span data-i18n="cta_preview">Προεπισκόπηση</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </div>
     </a>
 
     <div class="empty-state" id="emptyState">
       <p style="font-size:2rem;margin-bottom:12px">🔍</p>
-      <p>No designs match this filter.</p>
+      <p data-i18n="empty">Δεν βρέθηκαν designs για αυτό το φίλτρο.</p>
     </div>
 
   </main>
 
   <footer>
-    <p>14 premium Angular SPA designs &nbsp;·&nbsp; All designs are fully responsive &amp; production-ready</p>
+    <p data-i18n="footer">14 premium Angular SPA designs &nbsp;·&nbsp; Όλα τα designs είναι πλήρως responsive &amp; production-ready</p>
   </footer>
 
   <!-- MODAL -->
@@ -955,26 +987,283 @@
       <div class="modal-tags" id="modalTags"></div>
       <div class="modal-actions">
         <a class="btn-primary" id="modalOpenBtn" href="#" target="_blank">
-          Open Design
+          <span data-i18n="modal_open">Άνοιγμα Design</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>
-        <button class="btn-secondary" id="modalCloseBtn">Close</button>
+        <button class="btn-secondary" id="modalCloseBtn" data-i18n="modal_close">Κλείσιμο</button>
       </div>
     </div>
   </div>
 
   <script>
+    // ── TRANSLATIONS ─────────────────────────────────────────
+    const T = {
+      el: {
+        badge:              'UI Portfolio',
+        h1:                 'Επιλέξτε το Design σας',
+        subtitle:           'Περιηγηθείτε στη συλλογή μας από premium web designs. Κάθε template είναι πλήρως responsive, animated και έτοιμο για το brand σας.',
+        filter_all:         'Όλα',
+        filter_restaurant:  'Εστιατόριο',
+        filter_fine_dining: 'Fine Dining',
+        filter_italian:     'Ιταλικό',
+        filter_bar:         'Bar & Lounge',
+        filter_cafe:        'Καφέ',
+        filter_services:    'Υπηρεσίες',
+        filter_education:   'Εκπαίδευση',
+        filter_events:      'Εκδηλώσεις',
+        cta_preview:        'Προεπισκόπηση',
+        empty:              'Δεν βρέθηκαν designs για αυτό το φίλτρο.',
+        footer:             '14 premium Angular SPA designs \u00a0·\u00a0 Όλα τα designs είναι πλήρως responsive & production-ready',
+        modal_open:         'Άνοιγμα Design',
+        modal_close:        'Κλείσιμο',
+        not_deployed:       'Δεν έχει αναπτυχθεί ακόμα',
+        lang_toggle:        'EN',
+        // badges
+        badge_restaurant:   'Εστιατόριο',
+        badge_cafe:         'Καφέ',
+        badge_services:     'Υπηρεσίες',
+        badge_bar:          'Bar',
+        badge_bar_lounge:   'Bar & Lounge',
+        badge_events:       'Εκδηλώσεις',
+        badge_education:    'Εκπαίδευση',
+        badge_fine_dining:  'Fine Dining',
+        badge_italian:      'Ιταλικό',
+        // tags
+        tag_organic:        'Οργανικό',
+        tag_minimal:        'Minimal',
+        tag_elegant:        'Κομψό',
+        tag_dark_mode:      'Dark Mode',
+        tag_bilingual:      'Δίγλωσσο',
+        tag_bold:           'Τολμηρό',
+        tag_industrial:     'Βιομηχανικό',
+        tag_dark:           'Σκοτεινό',
+        tag_dark_luxury:    'Σκοτεινή Πολυτέλεια',
+        tag_animated:       'Animated',
+        tag_romantic:       'Ρομαντικό',
+        tag_editorial:      'Editorial',
+        tag_classic:        'Κλασικό',
+        tag_heritage:       'Κληρονομικό',
+        tag_gold:           'Χρυσό',
+        tag_dynamic:        'Δυναμικό',
+        tag_modern:         'Σύγχρονο',
+        tag_neon:           'Neon',
+        tag_vibrant:        'Ζωντανό',
+        tag_mediterranean:  'Μεσογειακό',
+        tag_warm:           'Ζεστό',
+        tag_colorful:       'Πολύχρωμο',
+        tag_playful:        'Παιχνιδιάρικο',
+        tag_upscale:        'Υπερπολυτελές',
+        tag_urban:          'Αστικό',
+        tag_artisan:        'Artisan',
+        tag_community:      'Κοινοτικό',
+        tag_luxury:         'Πολυτελές',
+        tag_cinematic:      'Κινηματογραφικό',
+        tag_italian:        'Ιταλικό',
+        tag_rustic:         'Ρουστίκ',
+        // card styles
+        style_botanica:     'Φυσικό & Γαλήνιο',
+        style_coffee:       'Καθαρό & Minimal',
+        style_ironform:     'Βιομηχανικό & Δυνατό',
+        style_barnoir:      'Σκοτεινό & Πολυτελές',
+        style_bliss:        'Απαλό & Ρομαντικό',
+        style_brasserie:    'Κληρονομικό & Κλασικό',
+        style_eduspark:     'Ενεργητικό & Σύγχρονο',
+        style_neon:         'Ζωντανό & Ηλεκτρικό',
+        style_taverna:      'Ζεστό & Αυθεντικό',
+        style_brunch:       'Παιχνιδιάρικο & Πολύχρωμο',
+        style_rooftop:      'Υπερπολυτελές & Αστικό',
+        style_espresso:     'Artisan & Ζεστό',
+        style_lumiere:      'Πολυτελές & Κινηματογραφικό',
+        style_trattoria:    'Ρουστίκ & Γεμάτο Ψυχή',
+      },
+      en: {
+        badge:              'UI Portfolio',
+        h1:                 'Choose Your Website Design',
+        subtitle:           'Browse our curated collection of premium website designs. Each template is fully responsive, animated, and ready for your brand.',
+        filter_all:         'All Designs',
+        filter_restaurant:  'Restaurant',
+        filter_fine_dining: 'Fine Dining',
+        filter_italian:     'Italian',
+        filter_bar:         'Bar & Lounge',
+        filter_cafe:        'Café',
+        filter_services:    'Services',
+        filter_education:   'Education',
+        filter_events:      'Events',
+        cta_preview:        'Preview',
+        empty:              'No designs match this filter.',
+        footer:             '14 premium Angular SPA designs \u00a0·\u00a0 All designs are fully responsive & production-ready',
+        modal_open:         'Open Design',
+        modal_close:        'Close',
+        not_deployed:       'Not yet deployed',
+        lang_toggle:        'ΕΛ',
+        // badges
+        badge_restaurant:   'Restaurant',
+        badge_cafe:         'Café',
+        badge_services:     'Services',
+        badge_bar:          'Bar',
+        badge_bar_lounge:   'Bar & Lounge',
+        badge_events:       'Events',
+        badge_education:    'Education',
+        badge_fine_dining:  'Fine Dining',
+        badge_italian:      'Italian',
+        // tags
+        tag_organic:        'Organic',
+        tag_minimal:        'Minimal',
+        tag_elegant:        'Elegant',
+        tag_dark_mode:      'Dark Mode',
+        tag_bilingual:      'Bilingual',
+        tag_bold:           'Bold',
+        tag_industrial:     'Industrial',
+        tag_dark:           'Dark',
+        tag_dark_luxury:    'Dark Luxury',
+        tag_animated:       'Animated',
+        tag_romantic:       'Romantic',
+        tag_editorial:      'Editorial',
+        tag_classic:        'Classic',
+        tag_heritage:       'Heritage',
+        tag_gold:           'Gold',
+        tag_dynamic:        'Dynamic',
+        tag_modern:         'Modern',
+        tag_neon:           'Neon',
+        tag_vibrant:        'Vibrant',
+        tag_mediterranean:  'Mediterranean',
+        tag_warm:           'Warm',
+        tag_colorful:       'Colorful',
+        tag_playful:        'Playful',
+        tag_upscale:        'Upscale',
+        tag_urban:          'Urban',
+        tag_artisan:        'Artisan',
+        tag_community:      'Community',
+        tag_luxury:         'Luxury',
+        tag_cinematic:      'Cinematic',
+        tag_italian:        'Italian',
+        tag_rustic:         'Rustic',
+        // card styles
+        style_botanica:     'Natural & Serene',
+        style_coffee:       'Clean & Minimal',
+        style_ironform:     'Industrial & Strong',
+        style_barnoir:      'Dark & Luxurious',
+        style_bliss:        'Soft & Romantic',
+        style_brasserie:    'Heritage & Classic',
+        style_eduspark:     'Energetic & Modern',
+        style_neon:         'Vibrant & Electric',
+        style_taverna:      'Warm & Authentic',
+        style_brunch:       'Playful & Colorful',
+        style_rooftop:      'Upscale & Urban',
+        style_espresso:     'Artisan & Warm',
+        style_lumiere:      'Luxury & Cinematic',
+        style_trattoria:    'Rustic & Soulful',
+      },
+    };
+
+    // ── CARD DESCRIPTIONS ────────────────────────────────────
+    const CARD_DESC = {
+      '15-botanica': {
+        el: 'Μια οργανική γαστρονομική εμπειρία με φυσική αισθητική. Κομψό πράσινο συναντά εκλεπτυσμένη κουζίνα.',
+        en: 'A lush botanical dining concept with an organic, nature-forward aesthetic. Elegant greenery meets refined cuisine.',
+      },
+      '16-coffee-minimal': {
+        el: 'Specialty καφετέρια single-origin με καθαρό, minimalist layout. Εναλλαγή light/dark θέματος και δίγλωσση υποστήριξη (ΕΛ/ΑΝ).',
+        en: 'Specialty single-origin coffee shop with a clean, minimalist layout. Light/dark theme switcher and bilingual (EN/GR) support included.',
+      },
+      '17-ironform-build': {
+        el: 'Δυναμικό site για κατασκευαστική εταιρεία με βιομηχανική τυπογραφία. Παρουσίαση έργων, υπηρεσίες και φόρμες προσφοράς.',
+        en: 'Bold construction company site with industrial typography. Features project showcases, services, and lead-capture quote forms.',
+      },
+      '18-bar-noir': {
+        el: 'Σκοτεινό, ατμοσφαιρικό cocktail bar με premium ποτά. Animated μενού cocktail, δίγλωσση εναλλαγή και ατμοσφαιρικά γραφικά.',
+        en: 'A dark, moody cocktail bar experience with premium spirits. Features animated cocktail menu, bilingual toggle, and atmospheric visuals.',
+      },
+      '19-bliss-weddings': {
+        el: 'Ρομαντικό στούντιο γαμήλιου σχεδιασμού με απαλή, editorial αισθητική. Galleries, πακέτα υπηρεσιών και συναισθηματική αφήγηση.',
+        en: 'Romantic wedding planning studio with a soft, editorial aesthetic. Gallery sections, service packages, and emotional storytelling layout.',
+      },
+      '20-brasserie-1891': {
+        el: 'Κλασική γαλλική brasserie με κληρονομική τυπογραφία και ζεστές χρυσές αποχρώσεις. Διαχρονικό design που παραπέμπει στην παριζιάνικη κουλτούρα.',
+        en: 'Classic French brasserie with heritage typography and warm gold accents. Timeless, editorial design that evokes century-old Parisian dining culture.',
+      },
+      '21-eduspark-academy': {
+        el: 'Δυναμική εκπαιδευτική πλατφόρμα με ενεργητικό design. Λίστες μαθημάτων, προφίλ εκπαιδευτών και τμήματα call-to-action για μετατροπές.',
+        en: 'Dynamic education platform with energetic design. Course listings, instructor profiles, and call-to-action sections built for conversion.',
+      },
+      '22-neon-garden': {
+        el: 'Ζωντανό neon garden lounge με καταπράσινα γραφικά και ηλεκτρική ατμόσφαιρα. Εντυπωσιακά animations και τολμηρή χρωματική παλέτα.',
+        en: 'Vibrant neon-lit garden lounge with lush visuals and a playful, electric atmosphere. Eye-catching animations and a bold color palette.',
+      },
+      '23-taverna-mediterra': {
+        el: 'Ζεστή μεσογειακή ταβέρνα με αιγαιοπελαγίτικους μπλε τόνους και ρουστίκ υφές. Δίγλωσσο μενού, αυθεντικές συνταγές και κοινοτική αφήγηση.',
+        en: 'Warm Mediterranean taverna with Aegean blue tones and rustic textures. Bilingual menu, authentic recipes, and community storytelling.',
+      },
+      '24-brunch-vivid': {
+        el: 'Πολύχρωμο και παιχνιδιάρικο all-day brunch εστιατόριο. Φωτεινή παλέτα, χαρούμενη τυπογραφία και instagram-ready grid layout.',
+        en: 'Colorful and playful all-day brunch restaurant. Bright palette with joyful typography, social-first visuals, and an instagram-ready grid layout.',
+      },
+      '25-rooftop-lounge': {
+        el: 'Υπερπολυτελές rooftop bar στην Αθήνα με πανοραμική θέα. Εκλεπτυσμένη indigo παλέτα, δίγλωσσο και ανοιχτό κάθε βράδυ αργά.',
+        en: 'Upscale Athens rooftop bar with panoramic city views. Sophisticated indigo palette, bilingual, and open nightly until late.',
+      },
+      '26-espresso-comune': {
+        el: 'Artisan espresso bar με κοινοτικό πνεύμα και ζεστή, editorial αισθητική. Split-nav layout, δίγλωσσο μενού καφέ και πλούσιες γήινες αποχρώσεις.',
+        en: 'Community-driven artisan espresso bar with a warm, editorial aesthetic. Split-nav layout, bilingual coffee menu, and rich earthy tones.',
+      },
+      '27-lumiere': {
+        el: 'Εκλεπτυσμένο fine dining με πολυτελείς χρυσές λεπτομέρειες και δραματικά σκοτεινά φόντα. Κομψό motion design και κινηματογραφικό hero section.',
+        en: 'Sophisticated fine dining with luxury gold accents and dramatic dark backgrounds. Elegant motion design and a cinematic hero section.',
+      },
+      '28-trattoria-vico': {
+        el: 'Ρουστίκ ιταλική trattoria με ζεστασιά και ψυχή. Χειροποίητα pasta, οικογενειακές συνταγές και φιλόξενη γειτονιά σε κάθε pixel.',
+        en: 'Rustic Italian trattoria with warmth and soul. Handcrafted pasta, family recipes, and a welcoming neighbourhood feel baked into every pixel.',
+      },
+    };
+
+    // ── LANGUAGE STATE ───────────────────────────────────────
+    let currentLang = 'el';
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.title = lang === 'el'
+        ? 'UI Portfolio — Επιλέξτε το Design σας'
+        : 'UI Portfolio — Choose Your Design';
+
+      const t = T[lang];
+
+      // Update all static [data-i18n] elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+
+      // Update card descriptions
+      document.querySelectorAll('.card[data-folder]').forEach(card => {
+        const folder = card.dataset.folder;
+        const desc = CARD_DESC[folder];
+        if (desc) card.querySelector('.card-desc').textContent = desc[lang];
+      });
+
+      // Update lang toggle label to show opposite language
+      document.getElementById('langToggle').childNodes[1].textContent = t.lang_toggle;
+
+      // Keep filter buttons showing & strip HTML entities for style fields
+      // (they use textContent so &amp; renders as & — already correct)
+    }
+
+    // ── LANG TOGGLE ──────────────────────────────────────────
+    document.getElementById('langToggle').addEventListener('click', () => {
+      setLang(currentLang === 'el' ? 'en' : 'el');
+    });
+
     // ── FILTER ──────────────────────────────────────────────
     const filterMap = {
       all: ['restaurant','bar','cafe','services','events','fine-dining','italian','education'],
-      restaurant: ['restaurant'],
-      'fine-dining': ['fine-dining'],
-      italian: ['italian'],
-      bar: ['bar'],
-      cafe: ['cafe'],
-      services: ['services'],
-      education: ['education'],
-      events: ['events'],
+      restaurant:   ['restaurant'],
+      'fine-dining':['fine-dining'],
+      italian:      ['italian'],
+      bar:          ['bar'],
+      cafe:         ['cafe'],
+      services:     ['services'],
+      education:    ['education'],
+      events:       ['events'],
     };
 
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -986,12 +1275,8 @@
         let visible = 0;
         document.querySelectorAll('.card').forEach(card => {
           const cat = card.dataset.category;
-          if (allowed.includes(cat)) {
-            card.classList.remove('hidden');
-            visible++;
-          } else {
-            card.classList.add('hidden');
-          }
+          if (allowed.includes(cat)) { card.classList.remove('hidden'); visible++; }
+          else card.classList.add('hidden');
         });
         document.getElementById('emptyState').classList.toggle('show', visible === 0);
       });
@@ -1005,27 +1290,29 @@
     const modalDesc = document.getElementById('modalDesc');
     const modalTags = document.getElementById('modalTags');
     const modalBtn  = document.getElementById('modalOpenBtn');
+    const modalBtnSpan = modalBtn.querySelector('span[data-i18n]');
 
     function openModal(card) {
+      const t = T[currentLang];
       modalIcon.textContent = card.querySelector('.card-icon').textContent;
       modalCat.textContent  = card.querySelector('.card-badge').textContent;
       modalName.textContent = card.querySelector('.card-name').textContent;
       modalDesc.textContent = card.querySelector('.card-desc').textContent;
       modalTags.innerHTML   = card.querySelector('.card-tags').innerHTML;
 
-      // Build URL — update these to point to your deployed/served URLs
       const folder = card.dataset.folder;
       const url = URLS[folder] || '#';
       modalBtn.href = url;
       if (url === '#') {
         modalBtn.style.pointerEvents = 'none';
         modalBtn.style.opacity = '0.45';
-        modalBtn.innerHTML = 'Not yet deployed <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+        modalBtnSpan.textContent = t.not_deployed;
         modalBtn.title = 'Deploy to Vercel or run: ng serve --port 42XX in the project folder';
       } else {
         modalBtn.style.pointerEvents = '';
         modalBtn.style.opacity = '1';
-        modalBtn.innerHTML = 'Open Design <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+        modalBtnSpan.textContent = t.modal_open;
+        modalBtn.title = '';
       }
 
       overlay.classList.add('open');
@@ -1038,10 +1325,7 @@
     }
 
     document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('click', e => {
-        e.preventDefault();
-        openModal(card);
-      });
+      card.addEventListener('click', e => { e.preventDefault(); openModal(card); });
     });
 
     document.getElementById('modalClose').addEventListener('click', closeModal);
@@ -1050,29 +1334,25 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
     // ── URL MAP ─────────────────────────────────────────────
-    // ── HOW TO PREVIEW LOCALLY ───────────────────────────────────────────
-    // Open a terminal in each project folder and run:
-    //   ng serve --port <PORT>
-    // Then reload this dashboard — the "Open Design" button will link live.
-    //
-    // Once deployed to Vercel, replace each '#' with the Vercel URL.
-    // ────────────────────────────────────────────────────────────────────
     const URLS = {
-      '15-botanica':         'https://15-botanica-gtytm9hvx-anastasishatzis-8269s-projects.vercel.app/',
-      '16-coffee-minimal':   'https://16-coffee-minimal-ibv7237cg-anastasishatzis-8269s-projects.vercel.app/',
-      '17-ironform-build':   '#',  // ng serve --port 4203
-      '18-bar-noir':         'https://09-bar-noir-5zqs.vercel.app/',  // ng serve --port 4204
-      '19-bliss-weddings':   '#',  // ng serve --port 4205
-      '20-brasserie-1891':   'https://20-brasserie-1891-ceqhvlvl3-anastasishatzis-8269s-projects.vercel.app/',
-      '21-eduspark-academy': '#',  // ng serve --port 4207
-      '22-neon-garden':      'https://22-neon-garden-34guydqtk-anastasishatzis-8269s-projects.vercel.app/',
-      '23-taverna-mediterra':'https://10-taverna-mediterra-9yrew8jrj-anastasishatzis-8269s-projects.vercel.app/',
-      '24-brunch-vivid':     '#',  // ng serve --port 4210
-      '25-rooftop-lounge':   '#',  // ng serve --port 4211
-      '26-espresso-comune':  '#',  // ng serve --port 4212
-      '27-lumiere':          'https://14-lumiere-7p6m9kpdm-anastasishatzis-8269s-projects.vercel.app/',
-      '28-trattoria-vico':   'https://15-trattoria-vico-ezzafh1fs-anastasishatzis-8269s-projects.vercel.app/',
+      '15-botanica':         'https://15-botanica-gtytm9hvx.vercel.app/',
+      '16-coffee-minimal':   'https://16-coffee-minimal-ibv7237cg.vercel.app/',
+      '17-ironform-build':   '#',
+      '18-bar-noir':         'https://09-bar-noir-5zqs.vercel.app/',
+      '19-bliss-weddings':   '#',
+      '20-brasserie-1891':   'https://20-brasserie-1891-ceqhvlvl3.vercel.app/',
+      '21-eduspark-academy': '#',
+      '22-neon-garden':      'https://22-neon-garden-34guydqtk.vercel.app/',
+      '23-taverna-mediterra':'https://10-taverna-mediterra-9yrew8jrj.vercel.app/',
+      '24-brunch-vivid':     '#',
+      '25-rooftop-lounge':   '#',
+      '26-espresso-comune':  '#',
+      '27-lumiere':          'https://14-lumiere-7p6m9kpdm.vercel.app/',
+      '28-trattoria-vico':   'https://15-trattoria-vico-ezzafh1fs.vercel.app/',
     };
+
+    // ── INIT ─────────────────────────────────────────────────
+    setLang('el');
   </script>
 </body>
 </html>
